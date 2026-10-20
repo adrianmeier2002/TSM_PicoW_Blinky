@@ -54,16 +54,16 @@ RUN \
     && ./venv/bin/pip install gcovr
 
 # Install SEGGER
-# for x86:           JLink_Linux_V810g_x86_64.deb
-# for Apple silicon: JLink_Linux_V810g_arm64.deb
+# for x86:           JLink_Linux_V980_x86_64.deb
+# for Apple silicon: JLink_Linux_V980_arm64.deb
 RUN \
     cd /apps \
-    && curl -d "accept_license_agreement=accepted&submit=Download+software" -X POST -O "https://www.segger.com/downloads/jlink/JLink_Linux_V810g_x86_64.deb" 
+    && curl -d "accept_license_agreement=accepted&submit=Download+software" -X POST -O "https://www.segger.com/downloads/jlink/JLink_Linux_V980_x86_64.deb" 
 # in case issue with mismatch between J-Link version between host and container/image: use matching version
 # issue with udev, see https://forum.segger.com/index.php/Thread/8953-SOLVED-J-Link-Linux-installer-fails-for-Docker-containers-Error-Failed-to-update/
 RUN \
     cd /apps \
-    && dpkg --unpack JLink_Linux_V810g_x86_64.deb \
+    && dpkg --unpack JLink_Linux_V980_x86_64.deb \
     && rm -f /var/lib/dpkg/info/jlink.postinst \
     && dpkg --configure jlink \
     && apt install -yf
